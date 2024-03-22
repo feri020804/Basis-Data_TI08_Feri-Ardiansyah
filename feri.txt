@@ -1,0 +1,154 @@
+User@HAMIDAH c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 9
+Server version: 10.4.28-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| dbkuliah1          |
+| dbti08             |
+| dbtoko2_database   |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+8 rows in set (0.007 sec)
+
+MariaDB [(none)]> USE dbkuliah1;
+Database changed
+MariaDB [dbkuliah1]> SHOW TABLES;
++---------------------+
+| Tables_in_dbkuliah1 |
++---------------------+
+| jurusan             |
+| mahasiswa           |
++---------------------+
+2 rows in set (0.014 sec)
+
+MariaDB [dbkuliah1]> DESC jurusan;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int(11)     | NO   | PRI | NULL    | auto_increment |
+| nama  | varchar(30) | NO   | UNI | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+2 rows in set (0.095 sec)
+
+MariaDB [dbkuliah1]> DESC Mahasiswa;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| id        | int(11)     | NO   | PRI | NULL    | auto_increment |
+| Nim       | int(11)     | NO   |     | NULL    |                |
+| nama      | varchar(30) | NO   | UNI | NULL    |                |
+| alamat    | varchar(30) | NO   | UNI | NULL    |                |
+| idjurusan | int(11)     | NO   |     | NULL    |                |
+| foto      | varchar(30) | YES  |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+6 rows in set (0.087 sec)
+
+MariaDB [dbkuliah1]> SELECT * FROM Mahasiswa;
+Empty set (0.002 sec)
+
+MariaDB [dbkuliah1]> INSERT INTO JENIS VALUES
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [dbkuliah1]> INSERT INTO jurusan(nama) VALUES
+    -> ('Teknik Informatika'), ('Sistem Informasi'),('Bisnis Digital'),('Design'),('Rekayasa Software');
+Query OK, 5 rows affected (0.025 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+MariaDB [dbkuliah1]> DESC jurusan;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int(11)     | NO   | PRI | NULL    | auto_increment |
+| nama  | varchar(30) | NO   | UNI | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+2 rows in set (0.053 sec)
+
+MariaDB [dbkuliah1]> SELECT * FROM jurusan;
++----+--------------------+
+| id | nama               |
++----+--------------------+
+|  3 | Bisnis Digital     |
+|  4 | Design             |
+|  5 | Rekayasa Software  |
+|  2 | Sistem Informasi   |
+|  1 | Teknik Informatika |
++----+--------------------+
+5 rows in set (0.001 sec)
+
+MariaDB [dbkuliah1]> SELECT * FROM Mahasiswa;
+Empty set (0.001 sec)
+
+MariaDB [dbkuliah1]> DESC Mahasiswa;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| id        | int(11)     | NO   | PRI | NULL    | auto_increment |
+| Nim       | int(11)     | NO   |     | NULL    |                |
+| nama      | varchar(30) | NO   | UNI | NULL    |                |
+| alamat    | varchar(30) | NO   | UNI | NULL    |                |
+| idjurusan | int(11)     | NO   |     | NULL    |                |
+| foto      | varchar(30) | YES  |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+6 rows in set (0.036 sec)
+
+MariaDB [dbkuliah1]> INSERT INTO Mahasiswa(Nim,nama,alamat,idjurusan,foto) VALUES
+    -> (0110223252,'Feri Ardiansyah','jl.H.salim gg.Musa2',1,feri.jpg)
+    -> ,
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 3
+MariaDB [dbkuliah1]> INSERT INTO Mahasiswa(Nim,nama,alamat,idjurusan,foto) VALUES
+    -> (0110223252,'Feri Ardiansyah','jl.H.salim gg.Musa2',1,feri.jpg);
+ERROR 1054 (42S22): Unknown column 'feri.jpg' in 'field list'
+MariaDB [dbkuliah1]> INSERT INTO Mahasiswa(Nim,nama,alamat,idjurusan,foto) VALUES
+    -> (0110223252,'Feri Ardiansyah','jl.H.salim gg.Musa2',1,'feri.jpg');
+Query OK, 1 row affected (0.018 sec)
+
+MariaDB [dbkuliah1]> SELECT * FROM Mahasiswa;
++----+-----------+-----------------+---------------------+-----------+----------+
+| id | Nim       | nama            | alamat              | idjurusan | foto     |
++----+-----------+-----------------+---------------------+-----------+----------+
+|  1 | 110223252 | Feri Ardiansyah | jl.H.salim gg.Musa2 |         1 | feri.jpg |
++----+-----------+-----------------+---------------------+-----------+----------+
+1 row in set (0.001 sec)
+
+MariaDB [dbkuliah1]> INSERT INTO Mahasiswa(Nim,nama,alamat,idjurusan,foto) VALUES
+    -> (0110223256,'Dzaka Dhiya','jl. cisalak',4,'dzaka.jpg'),
+    -> (0110223251,'Jamaluddin Al-mandili','jl.srengseangan',3,'jamal.jpg'),
+    -> (0110223253,'Yusuf Doli Islami','jl.H.Salim gg.Musa2',2,'yusuf.jpg'),
+    -> (0110223253,'Irham Syahputra','jl. RTM Kelapa Dua',5,'irham.jpg');
+ERROR 1062 (23000): Duplicate entry 'jl.H.Salim gg.Musa2' for key 'alamat'
+MariaDB [dbkuliah1]> INSERT INTO Mahasiswa(Nim,nama,alamat,idjurusan,foto) VALUES
+    -> (0110223256,'Dzaka Dhiya','jl. cisalak',4,'dzaka.jpg'),
+    -> (0110223251,'Jamaluddin Al-mandili','jl.srengseangan',3,'jamal.jpg'),
+    -> (0110223253,'Yusuf Doli Islami','jl.Satu Indah',2,'yusuf.jpg'),
+    -> (0110223253,'Irham Syahputra','jl. RTM Kelapa Dua',5,'irham.jpg');
+Query OK, 4 rows affected (0.007 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+MariaDB [dbkuliah1]> SELECT * FROM Mahasiswa;
++----+-----------+-----------------------+---------------------+-----------+-----------+
+| id | Nim       | nama                  | alamat              | idjurusan | foto      |
++----+-----------+-----------------------+---------------------+-----------+-----------+
+|  1 | 110223252 | Feri Ardiansyah       | jl.H.salim gg.Musa2 |         1 | feri.jpg  |
+|  6 | 110223256 | Dzaka Dhiya           | jl. cisalak         |         4 | dzaka.jpg |
+|  7 | 110223251 | Jamaluddin Al-mandili | jl.srengseangan     |         3 | jamal.jpg |
+|  8 | 110223253 | Yusuf Doli Islami     | jl.Satu Indah       |         2 | yusuf.jpg |
+|  9 | 110223253 | Irham Syahputra       | jl. RTM Kelapa Dua  |         5 | irham.jpg |
++----+-----------+-----------------------+---------------------+-----------+-----------+
+5 rows in set (0.001 sec)
+
+MariaDB [dbkuliah1]>
